@@ -1,0 +1,61 @@
+.el-dialog {
+  text-align: left;
+}
+
+.el-dialog__header {
+  padding: 0;
+  margin: 0;
+}
+  
+.dialog-header {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  color: #fff;
+  background-color: #0A53A4;
+}
+.dialog-header h3 {  
+  padding-left: 15px;
+}
+  
+.el-dialog__body {
+  padding: 7px 0 2px 0;
+  margin: 7px 0 7px 0;
+}
+
+.el-dialog__headerbtn {
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  background: 0 0;
+  border: none;
+  outline: 0;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+}
+
+.el-dialog__headerbtn .el-dialog__close {
+  color: #fff;
+}
+
+.el-dialog__headerbtn i {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+}
+
+.el-dialog__headerbtn i:hover {
+  background-color: #0A4B92;
+}
+
+a {
+  color: #0070d2;
+  text-decoration: none;
+  transition: all 0.1s;  
+}
+
+.el-dialog-form {
+  border-bottom: solid 1px #EFEEEC;
+  padding: 8px 0 6px 10px;
+}
