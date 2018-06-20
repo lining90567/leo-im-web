@@ -33,6 +33,10 @@ Leo-IM，开源好用的IM。
 	config/prod.env.js
 	
 	设置BASE_API与WEBSOCKET_URL	
+	
+## 安装依赖包
+
+- 首次启动之前需要安装依赖包	npm install（建议使用cnpm）
 
 ## 本地运行
 
