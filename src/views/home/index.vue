@@ -230,7 +230,10 @@ export default {
             this.unreadMessageChannelList.push(message.channelId)
             getUserChannel(this.userInfo.id, message.channelId)
             .then(response => {
-              this.userChannelList.unshift(response.data)
+              let exists = this.userChannelList.findIndex(item => item.channelId === message.channelId)
+              if(exists === -1) {
+                this.userChannelList.unshift(response.data)
+              }
               let existingUnreadMsgChannelIndex = this.unreadMessageChannelList.findIndex(item => item === message.channelId)
               if(existingUnreadMsgChannelIndex > -1) {
                 this.unreadMessageChannelList.splice(existingUnreadMsgChannelIndex, 1)
