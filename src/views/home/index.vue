@@ -134,7 +134,8 @@ export default {
       onlineStatus: 'online',
       userChannelList: [],
       selectedChannelId: '',
-      searchKey: ''
+      searchKey: '',
+      unreadMessageChannelList: []
     }
   },
   methods: {
@@ -224,13 +225,21 @@ export default {
       if(message.channelId !== this.selectedChannelId) {
         let index = this.userChannelList.findIndex(item => item.channelId === message.channelId)
         if(index === -1) {
-          getUserChannel(this.userInfo.id, message.channelId)
-          .then(response => {
-            this.userChannelList.unshift(response.data)
-          })
-          .catch(error => {
-            outputError(this, error)
-          })          
+          let unreadMsgChannelIndex = this.unreadMessageChannelList.findIndex(item => item === message.channelId)
+          if(unreadMsgChannelIndex == -1) {
+            this.unreadMessageChannelList.push(message.channelId)
+            getUserChannel(this.userInfo.id, message.channelId)
+            .then(response => {
+              this.userChannelList.unshift(response.data)
+              let existingUnreadMsgChannelIndex = this.unreadMessageChannelList.findIndex(item => item === message.channelId)
+              if(existingUnreadMsgChannelIndex > -1) {
+                this.unreadMessageChannelList.splice(existingUnreadMsgChannelIndex, 1)
+              }
+            })
+            .catch(error => {
+              outputError(this, error)
+            })          
+          }         
         } else {
           this.userChannelList[index].unreadMessageCount += 1
         }
