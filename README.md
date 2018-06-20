@@ -41,3 +41,7 @@ Leo-IM，开源好用的IM。
 ## 构建
 
 - npm run build
+
+## Server端源码
+
+- <a href="https://github.com/lining90567/leo-im-server" target="_blank">https://github.com/lining90567/leo-im-server</a>
