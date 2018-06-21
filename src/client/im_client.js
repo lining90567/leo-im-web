@@ -89,7 +89,10 @@ export class IMClient {
     this.reconnectUtil.start()
     if(this.handleConnectionClosed) {
       this.handleConnectionClosed()
-    } 
+    }
+    if(this.handleUserOffline) {
+      this.handleUserOffline()
+    }
   }
 
   onError(error) {
@@ -298,6 +301,13 @@ export class IMClient {
   }
   unbindUserOnline() {
     this.handleUserOnline = null
+  }
+
+  bindUserOffline(callback) {
+    this.handleUserOffline = callback
+  }
+  unbindUserOffline() {
+    this.handleUserOffline = null
   }
 
 }

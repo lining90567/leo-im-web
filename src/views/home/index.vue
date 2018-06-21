@@ -348,7 +348,14 @@ export default {
       .catch(error => {
         outputError(this, error)
       })
-    },   
+    },
+    onUserOffline() {
+      this.onlineStatus = 'offline'
+      updateOnlineStatus(JSON.parse(sessionStorage.getItem('currentUser')).id, this.onlineStatus)
+      .catch(error => {
+        outputError(this, error)
+      })
+    },    
     initIMClient() {
       let wsUrl = process.env.WEBSOCKET_URL + '?token=' + sessionStorage.getItem('token')
       const imClient = new IMClient(wsUrl, 30 * 1000)
@@ -363,6 +370,7 @@ export default {
       imClient.bindRemoveFromChannel(this.onRemoveFromChannel)
       imClient.bindChannelRemoved(this.onChannelRemoved)
       imClient.bindUserOnline(this.onUserOnline)
+      imClient.bindUserOffline(this.onUserOffline)
       imClient.connect(this.bindToGroupChannel)
     },
     bindToGroupChannel(imClient) {
