@@ -88,7 +88,6 @@ export default {
             outputError(this, error)
           })            
         } else {
-          this.messageList = []
           this.loadingVisible = false
         }
       })
