@@ -148,6 +148,7 @@ export default {
       if (!isLt2M) {
         this.$message.error('文件大小不能超过 2MB!')
       }
+      this.postFileData.channelId = this.channelId
       this.postFileData.size = file.size
       if(isLt2M) {
         this.loadingVisible = true
