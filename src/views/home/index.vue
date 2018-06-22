@@ -51,7 +51,7 @@
       <div class="channel-search-container">
         <div class="search"><input type="text" placeholder="搜索" v-model="searchKey" @keyup="onSearchInputKeyUp"><i class="el-icon-search" @click="doSearchChannel"></i></div>
       </div>
-      <div class="channel-container">
+      <div class="channel-container" v-bind:style="{height: channelListHeight}">
         <ul class="nav-channel first-nav-channel">
           <li class="channel-header">
             <span>群聊</span>
@@ -135,7 +135,8 @@ export default {
       userChannelList: [],
       selectedChannelId: '',
       searchKey: '',
-      unreadMessageChannelList: []
+      unreadMessageChannelList: [],
+      channelListHeight: ''
     }
   },
   methods: {
@@ -483,6 +484,14 @@ export default {
       this.$router.push({ name: 'welcome' })
     }
   },
+  mounted() {
+    this.channelListHeight = (document.body.clientHeight - 101) + 'px'
+    window.onresize = () => {
+      return (() => {
+        this.channelListHeight = (document.body.clientHeight - 101) + 'px'
+      })()
+    }
+  },
   components: { GroupIcon, StatusOnlineIcon, StatusOfflineIcon, StatusAwayIcon, 
     StatusDndIcon, StatusOnlineAvatar, StatusOfflineAvatar, StatusAwayAvatar, StatusDndAvatar,
     EditPersonalInfo: resolve => require(['@/components/user/editPersonalInfo'], resolve),
@@ -494,30 +503,26 @@ export default {
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
   background-color: #F0F0F0;
 }
 ::-webkit-scrollbar-thumb {
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
-    border-radius: 2px;
-    background: rgba(0,0,0,.2);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  background: rgba(0,0,0,.2);
 }
 ::-webkit-scrollbar-track {
-    background: rgba(0,0,0,.1);
+  background: rgba(0,0,0,.1);
 }
 .body-container {
     height: 100%;
     background-color: #fff;
+    overflow: hidden;
 }
 .sidebar {
   width: 220px;
@@ -627,8 +632,9 @@ body {
   }
 
   .channel-search-container {
+    height: 28px;
     padding: 3px 5px 0 5px;
-    .search {
+    .search {      
       padding: 0 0 0 5px;
       background-color: #046BBB;
       height: 28px;
